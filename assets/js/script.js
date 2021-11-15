@@ -1,9 +1,9 @@
 // Assignment code here
 
-var arraySpecial = ['@','%','+','\\','/',"'",'!','#','$','^','?',':',',',')','(','}','{',']','[','~','-','_','.',];
+var arraySpecial = ['@','%','+',"'",'!','#','$','^','?',':',',',')','(','}','{',']','[','~','-','_','.'];
 var arrayNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-var arrayLowerCase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',];
-var arrayUpperCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',];
+var arrayLowerCase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var arrayUpperCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 var passwordArray = [];
  
 
@@ -12,7 +12,15 @@ function generatePassword() {
   //greetings, human. 
   var helloPrompt = window.alert("Hello! Complete the following prompts to generate your password.");
 
-  //want some lower case letter?
+  //let's make a password. how long do you want it to be? 
+  var passwordLength = window.prompt ("How many characters do you want your password to be? Must be BETWEEN 8 AND 128 characters.")
+      //don't try to pull a fast one! 
+      if (passwordLength === "" || passwordLength < 8 || passwordLength >128) {
+        window.alert("Must select a character amount between 8 and 128.");
+        return generatePassword();
+      }
+
+  //want some lower case letters?
   var lowerCaseConfirm = window.confirm("CONFIRM if you want LOWER CASE letters in your password.");
 
   //how about some upper case ones, too? 
@@ -41,14 +49,18 @@ function generatePassword() {
       passwordArray = passwordArray.concat(arraySpecial);
     }
 
+    var newPassword = [];
 
+    //new password but like make it random 
+    for (var i=0; i < passwordLength; i++) {
+      var randomArray = Math.floor(Math.random() * passwordArray.length)
+      var randomChar = passwordArray[randomArray];
+      newPassword.push(randomChar);
+      newPassword.join(' ');
+    }    
 
-
-
-return passwordArray;
-
-
-
+//make the magic happen
+return newPassword; 
 }
 
 // Get references to the #generate element
